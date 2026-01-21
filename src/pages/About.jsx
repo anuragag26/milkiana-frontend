@@ -1,5 +1,5 @@
 import Counter from "../components/common/Counter";
-import MainLayout from "../layouts/MainLAyout";
+import MainLayout from "../layouts/MainLayout";
 
 const AboutUs = () => {
   return (
