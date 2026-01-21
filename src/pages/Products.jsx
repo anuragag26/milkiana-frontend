@@ -1,5 +1,5 @@
 import ProductList from "../components/products/ProductList";
-import MainLayout from "../layouts/MainLAyout";
+import MainLayout from "../layouts/MainLayout";
 
 const Products = () => {
   return (

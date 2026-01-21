@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import MainLayout from "../layouts/MainLAyout";
+import MainLayout from "../layouts/MainLayout";
 
 const Contact = () => {
   const [form, setForm] = useState({
