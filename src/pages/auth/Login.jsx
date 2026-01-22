@@ -27,9 +27,12 @@ const Login = () => {
           ? "http://localhost:4000/api/admin/login"
           : "http://localhost:4000/api/auth/login";
 
-      const res = await axios.post(endpoint, { email, password });
+      const res = await axios.post(endpoint, {
+        email,
+        password,
+        role, // 🔥 IMPORTANT FIX
+      });
 
-      /* ================= SAVE AUTH DATA ================= */
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
@@ -39,12 +42,7 @@ const Login = () => {
           : `Welcome ${res.data.user.name} 👋`,
       );
 
-      /* ================= REDIRECT ================= */
-      if (res.data.user.role === "admin") {
-        navigate("/"); // admin sees full website
-      } else {
-        navigate("/");
-      }
+      navigate("/");
     } catch (err) {
       toast.error(err.response?.data?.message || "Invalid email or password");
     } finally {
@@ -113,13 +111,13 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition"
+            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition disabled:opacity-60"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        {/* SIGNUP (ONLY FOR USER) */}
+        {/* SIGNUP */}
         {role === "user" && (
           <p className="text-center text-sm text-gray-600 mt-6">
             Don’t have an account?{" "}

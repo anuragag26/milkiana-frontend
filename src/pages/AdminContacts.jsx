@@ -7,6 +7,7 @@ import Footer from "../components/common/Footer";
 const AdminContacts = () => {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     fetchContacts();
@@ -14,7 +15,11 @@ const AdminContacts = () => {
 
   const fetchContacts = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/contact");
+      const res = await axios.get("http://localhost:4000/api/contact", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setContacts(res.data);
     } catch {
       toast.error("Failed to load messages");
@@ -25,12 +30,22 @@ const AdminContacts = () => {
 
   const markRead = async (id) => {
     try {
-      await axios.put("http://localhost:4000/api/contact/${id}/read");
+      await axios.put(
+        `http://localhost:4000/api/contact/${id}/read`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
       setContacts((prev) =>
         prev.map((c) => (c._id === id ? { ...c, isRead: true } : c)),
       );
+
       toast.success("Marked as read");
-    } catch {
+    } catch (err) {
       toast.error("Failed to update message");
     }
   };
@@ -39,10 +54,15 @@ const AdminContacts = () => {
     if (!window.confirm("Delete this message?")) return;
 
     try {
-      await axios.delete(`https://milkiana-backend.vercel.app/api/contact/${id}`);
+      await axios.delete(`http://localhost:4000/api/contact/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       setContacts((prev) => prev.filter((c) => c._id !== id));
       toast.success("Message deleted");
-    } catch {
+    } catch (err) {
       toast.error("Failed to delete message");
     }
   };

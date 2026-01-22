@@ -27,7 +27,7 @@ const Contact = () => {
     try {
       setLoading(true);
 
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/contact`, form);
+      await axios.post("http://localhost:4000/api/contact", form);
 
       toast.success("Thanks! We’ll contact you shortly 👋");
 

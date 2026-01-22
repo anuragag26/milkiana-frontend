@@ -46,7 +46,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get("https://milkiana-backend.vercel.app/api/orders");
+        const res = await axios.get("http://localhost:4000/api/orders");
         setOrders(res.data);
       } catch (err) {
         console.error("Failed to fetch orders", err);
@@ -115,7 +115,7 @@ const Admin = () => {
   const updateStatus = async (id, status) => {
     try {
       const res = await axios.put(
-        `https://milkiana-backend.vercel.app/api/orders/${id}/status`,
+        `http://localhost:4000/api/orders/${id}/status`,
         { status },
       );
 
@@ -130,7 +130,7 @@ const Admin = () => {
     if (!window.confirm("Cancel and delete this order?")) return;
 
     try {
-      await axios.delete(`https://milkiana-backend.vercel.app/api/orders/${id}`);
+      await axios.delete(`http://localhost:4000/api/orders/${id}`);
       setOrders((prev) => prev.filter((o) => o._id !== id));
       toast.success("Order cancelled and deleted ❌");
     } catch {
