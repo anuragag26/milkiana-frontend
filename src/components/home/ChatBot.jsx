@@ -25,7 +25,7 @@ const ChatBot = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/chat`, {
+      const res = await axios.post("http://localhost:4000/api/chat", {
         message: input,
       });
 

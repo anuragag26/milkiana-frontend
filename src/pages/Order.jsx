@@ -43,7 +43,7 @@ const Order = () => {
         return;
       }
 
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`, {
+      await axios.post("http://localhost:4000/api/orders", {
         productId: String(product.id),
         productName: product.name,
         customerName: form.customerName.trim(),

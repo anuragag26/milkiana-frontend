@@ -24,8 +24,8 @@ const Login = () => {
 
       const endpoint =
         role === "admin"
-          ? `${import.meta.env.VITE_API_URL}/api/admin/login`
-          : `${import.meta.env.VITE_API_URL}/api/auth/login`;
+          ? "http://localhost:4000/api/admin/login"
+          : "http://localhost:4000/api/auth/login";
 
       const res = await axios.post(endpoint, { email, password });
 

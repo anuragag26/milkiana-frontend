@@ -14,7 +14,7 @@ const AdminContacts = () => {
 
   const fetchContacts = async () => {
     try {
-      const res = await axios.get("https://milkiana-backend.vercel.app/api/contact");
+      const res = await axios.get("http://localhost:4000/api/contact");
       setContacts(res.data);
     } catch {
       toast.error("Failed to load messages");
@@ -25,7 +25,7 @@ const AdminContacts = () => {
 
   const markRead = async (id) => {
     try {
-      await axios.put(`https://milkiana-backend.vercel.app/api/contact/${id}/read`);
+      await axios.put("http://localhost:4000/api/contact/${id}/read");
       setContacts((prev) =>
         prev.map((c) => (c._id === id ? { ...c, isRead: true } : c)),
       );
